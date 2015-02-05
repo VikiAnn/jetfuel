@@ -1,6 +1,10 @@
 class UrlsController < ApplicationController
   def index
-    @urls = Url.all
+    if params[:popularity]
+      @urls = Url.sorted_by_popularity
+    else
+      @urls = Url.sorted_by_created_date
+    end
   end
 
   def new
@@ -20,6 +24,7 @@ class UrlsController < ApplicationController
     @url = Url.find_by(slug: params[:slug])
     if @url
       redirect_to @url.given_url
+      @url.increment_hits
     end
   end
 
