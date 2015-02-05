@@ -1,6 +1,10 @@
 class UrlsController < ApplicationController
   def index
-    @urls = Url.sorted_by_popularity
+    if params[:popularity]
+      @urls = Url.sorted_by_popularity
+    else
+      @urls = Url.sorted_by_created_date
+    end
   end
 
   def new
