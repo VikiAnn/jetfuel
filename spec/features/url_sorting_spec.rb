@@ -20,10 +20,16 @@ describe "url sorting" do
       visit root_path
       find_link("Sort by popularity").click
 
-      within(first("div.thumbnail")) do
+      within("ul:first") do
         expect(page).to have_content(url2.given_url)
         expect(page).not_to have_content(url1.given_url)
         expect(page).not_to have_content(url3.given_url)
+      end
+
+      within("ul:last") do
+        expect(page).to have_content(url3.given_url)
+        expect(page).not_to have_content(url1.given_url)
+        expect(page).not_to have_content(url2.given_url)
       end
     end
   end
@@ -38,10 +44,16 @@ describe "url sorting" do
 
       visit root_path
 
-      within(first("div.thumbnail")) do
+      within("ul:first") do
         expect(page).to have_content(url3.given_url)
         expect(page).not_to have_content(url1.given_url)
         expect(page).not_to have_content(url2.given_url)
+      end
+
+      within("ul:last") do
+        expect(page).to have_content(url1.given_url)
+        expect(page).not_to have_content(url2.given_url)
+        expect(page).not_to have_content(url3.given_url)
       end
     end
   end

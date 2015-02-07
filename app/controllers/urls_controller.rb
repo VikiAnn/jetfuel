@@ -14,7 +14,6 @@ class UrlsController < ApplicationController
   def create
     @url = Url.create(url_params)
     if @url.save
-      Resque.enqueue(TitleFetcher, @url)
       redirect_to root_path
     else
       render :new, notice: "Something went wrong!"
