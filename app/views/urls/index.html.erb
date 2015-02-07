@@ -1,10 +1,13 @@
-<%= link_to "Add url", new_url_path %>
-<%= link_to "Sort by popularity", root_path(popularity: "true") %>
-<% @urls.each do |url| %>
-  <ul>
-    <li><%= url.given_url %></li>
-    <li>Shortened link: <%= link_to "jet.fuel/#{url.slug}", "/#{url.slug}" %></li>
-    <li>Hits: <%= url.hits %></li>
-    <li><%= url.pretty_created_at %></li>
-  </ul>
-<% end %>
+<div class="container">
+  <% @urls.in_groups_of(3) do |url1, url2, url3| %>
+    <div class="row">
+      <%= render "url", url: url1 %>
+      <% if url2 %>
+        <%= render "url", url: url2 %>
+      <% end %>
+      <% if url3 %>
+        <%= render "url", url: url2 %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

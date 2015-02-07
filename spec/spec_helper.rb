@@ -1,3 +1,7 @@
+require "support/background_jobs"
+require "simplecov"
+SimpleCov.start
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -6,4 +10,12 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
+
+  config.around(:each, inline: true) do |example|
+    run_background_jobs_immediately do
+      example.run
+    end
+  end
+
+  config.include BackgroundJobs
 end
