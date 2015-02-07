@@ -2,7 +2,9 @@ require "rails_helper"
 
 describe "url listing page", inline: true do
   it "lists urls along with all relevant info" do
-    url = Url.create!(given_url: "www.first.example.com", hits: 4, title: "Example")
+    url = Url.create!(given_url: "www.first.example.com",
+                      hits: 4,
+                      title: "Example")
 
     visit root_path
 

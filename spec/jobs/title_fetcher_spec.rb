@@ -5,6 +5,6 @@ describe TitleFetcher do
     url = Url.create!(given_url: "https://www.facebook.com/")
     TitleFetcher.perform(url)
 
-    expect(url.reload.title).to eq("Welcome to Facebook - Log In, Sign Up or Learn More")
+    expect(url.reload.title).to include("Welcome to Facebook")
   end
 end
