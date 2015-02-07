@@ -26,7 +26,7 @@ describe "url shortening", type: :feature do
     it "can add a url" do
       visit root_path
       find_link("Add url").click
-      long_url = "www.pathetically_long_urls_r_us.example.com"
+      long_url = "www.pathetically-long-urls-r-us-example.com"
 
       fill_in("Given url", with: long_url)
       find_button("Shorten!").click
